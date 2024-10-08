@@ -12,9 +12,13 @@ Route::get('/', function () {
 //     return view('pages.accomodations');
 // });
 
-Route::get('/accomodations', [AccomodationsController::class, 'get_accomodations']);
+Route::get('/accomodations', [AccomodationsController::class, 'get_accomodations'])->name('listAccomodations');
 
 Route::get('/bookings', [BookingsController::class, 'get_bookings_accomodation'])->name('bookingsByAccomodation');
+
+Route::post('/save_accomodation', [AccomodationsController::class, 'save'])->name('saveAccomodation');
+
+Route::get('/formulario', [BookingsController::class, 'getForm'])->name('formBooking');
 
 /**
  * la funcion url() => hace referencia a la uri de la ruta
