@@ -17,7 +17,7 @@ class BookingsController extends Controller
         if($request->has('select_accomodations')){
             $id_accomodation = $request->input('select_accomodations');
 
-            $bookings = Bookings::join('accomodations','bookings.accomodation_id','=','accomodations.id')->where('bookings.accomodation_id',$id_accomodation)->select('bookings.*','accomodations.name as accomodation')->get();
+            $bookings = Bookings::join('accomodations','bookings.accomodation_id','=','accomodations.id')->where('bookings.accomodation_id',$id_accomodation)->select('bookings.*','accomodations.name as accomodation')->orderby('status','desc')->get();
         }else{
             $bookings = [];
         }
@@ -45,7 +45,7 @@ class BookingsController extends Controller
 
     //metodo para guardar la reservacion
     public function save(Request $request){
-
+        /** VALIDATOR */
         //se utiliza cuando trabajamos con vistas
         $request->validate([
             'booking' => 'required|string|max:10',
@@ -55,5 +55,30 @@ class BookingsController extends Controller
             'accomodation' => 'required',
             'user' => 'required'
         ]);
+
+        //guardando el booking
+        $booking = new Bookings();
+        $booking->booking = $request->input('booking');
+        $booking->check_in_date = $request->input('in_date');
+        $booking->check_out_date = $request->input('out_date');
+        $booking->total_amount = $request->input('total_amount');
+        $booking->status = "CONFIRMED";
+        $booking->accomodation_id = $request->input('accomodation');
+        $booking->user_id = $request->input('user');
+        $booking->save();
+
+        return redirect()->route('bookingsByAccomodation');
+    }
+
+    //metodo para cancelar una reservacion
+    public function updateStatus($id){
+        //encontrando la info de la reservacion
+        $booking = Bookings::find($id); //{}
+        $booking->status = "CANCELLED";
+        $booking->update();
+
+        //return redirect()->route('bookingsByAccomodation');
+        /** redireccionamos a la misma pagina con el back() */
+        return redirect()->back();
     }
 }

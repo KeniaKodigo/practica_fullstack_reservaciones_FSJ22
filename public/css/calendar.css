@@ -1,0 +1,27 @@
+/* Cambiar el color de fondo de la cabecera */
+.fc-toolbar {
+    /* background-color: #007bff;  Cambiar al color deseado */
+    /* color: #3b2142; */
+}
+
+/* Cambiar el color de los días de la semana */
+.fc-day-header {
+    color: white; /* Cambiar el color del texto */
+}
+
+/* Cambiar el color de los eventos */
+.fc-event {
+    background-color: #847586; /* Color de fondo del evento */
+    border: none; /* Quitar borde */
+}
+
+/* Cambiar el color del texto del evento */
+.fc-event-title {
+    color: white; /* Color del texto del evento */
+}
+
+/* Estilo para la vista semanal */
+.fc-time-grid-event {
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+}

@@ -18,6 +18,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{url('/formulario')}}">Registro de reservaciones</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('/calendar')}}">Calendario</a>
+            </li>
             </ul>
         </div>
     </div>
