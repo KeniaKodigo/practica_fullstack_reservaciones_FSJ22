@@ -28,10 +28,25 @@
                  * el calendario mostrara por mes
                  */
                 initialView: 'dayGridMonth',
-                events: @json($bookings)
-            });
+                events: @json($bookings),
+                eventContent: function(arg) {
+                    //personalizamos el contenido del evento (booking)
+                    const titleEl = document.createElement('div');
+                    titleEl.innerHTML = arg.event.title;
 
-            calendar.render();
-        })
+                    const totalAmountEl = document.createElement('div');
+                    totalAmountEl.innerHTML = 'Monto Total:' + arg.event.extendedProps.total_amount;
+
+                    const accomodationEl = document.createElement('div');
+                    accomodationEl.innerHTML = 'Alojamiento: ' + arg.event.extendedProps.accomodation;
+
+                    console.log(accomodationEl);
+                    const arrayOfDomNodes = [ titleEl, totalAmountEl, accomodationEl ]
+                    return { domNodes: arrayOfDomNodes }
+
+                }
+            });
+        calendar.render();
+        });
     </script>
 @endpush

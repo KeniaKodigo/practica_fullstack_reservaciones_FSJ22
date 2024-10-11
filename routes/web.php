@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccomodationsController;
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,6 +27,8 @@ Route::post('/save_booking', [BookingsController::class, 'save'])->name('saveBoo
 Route::patch('/status_booking/{id}', [BookingsController::class, 'updateStatus'])->name('statusBooking');
 
 Route::get('/calendar', [CalendarController::class, 'get_calendar']);
+
+Route::get('/reporte', [PDFController::class, 'index']);
 
 /**
  * la funcion url() => hace referencia a la uri de la ruta

@@ -21,6 +21,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{url('/calendar')}}">Calendario</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" target="__blank" href="{{url('/reporte')}}">Reporte</a>
+            </li>
             </ul>
         </div>
     </div>

@@ -9,15 +9,18 @@ class CalendarController extends Controller
 {
     public function get_calendar(){
         //obtener todas las reservaciones confirmadas
-        $calendar = Bookings::select('*')->where('status','CONFIRMED')->get();
+        //nombre del alojamiento y el monto total
+        $calendar = Bookings::join('accomodations','bookings.accomodation_id','=', 'accomodations.id')->select('bookings.*','accomodations.name as accomodation')->where('status','CONFIRMED')->get();
 
         //guardando reservaciones para el calendario
         $bookings = [];
         foreach($calendar as $item){
             $bookings[] = [
                 'title' => $item->booking,
-                'start' => $item->check_in_date . 'T10:00:00',
-                'end' => $item->check_out_date . 'T13::59:59'
+                'start' => $item->check_in_date . 'T11:00:00',
+                'end' => $item->check_out_date . 'T13::59:59',
+                'total_amount' => $item->total_amount,
+                'accomodation' => $item->accomodation
             ];
         }
 
